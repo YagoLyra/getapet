@@ -13,6 +13,9 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.static("public"));
 
 // Routes
+const UserRoutes = require("./routes/userRoutes");
+
+app.use("/users", UserRoutes);
 
 app.listen(5000, () => {
   console.log("Servidor rodando na porta 5000");
