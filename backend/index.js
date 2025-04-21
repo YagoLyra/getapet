@@ -14,8 +14,10 @@ app.use(express.static("public"));
 
 // Routes
 const UserRoutes = require("./routes/userRoutes");
+const PetRoutes = require("./routes/petRoutes");
 
 app.use("/users", UserRoutes);
+app.use("/pets", PetRoutes);
 
 app.listen(5000, () => {
   console.log("Servidor rodando na porta 5000");
