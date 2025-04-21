@@ -1,3 +1,29 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Remove duplicates and refactor
+
 # Node.js dependencies
 node_modules/
 
@@ -7,12 +33,15 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Environment variables
 .env
 
 # Build output
 dist/
+dist-ssr/
 build/
 
 # System files
@@ -21,6 +50,7 @@ Thumbs.db
 
 # IDE files
 .vscode/
+!.vscode/extensions.json
 .idea/
 *.iml
 
@@ -29,6 +59,7 @@ Thumbs.db
 *.swp
 *.bak
 *.orig
+*.local
 
 # Coverage reports
 coverage/
