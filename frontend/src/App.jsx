@@ -1,10 +1,31 @@
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+// components
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+
+// pages
+import Login from "./components/pages/auth/Login";
+import Register from "./components/pages/auth/Register";
+import Home from "./components/pages/Home";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Get A Pet</h1>
-    </div>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+      <Footer />
+    </Router>
   );
 }
 
