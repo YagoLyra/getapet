@@ -10,6 +10,7 @@ import Message from "./components/layout/Message";
 import Login from "./components/pages/auth/Login";
 import Register from "./components/pages/auth/Register";
 import Home from "./components/pages/Home";
+import Profile from "./components/pages/user/Profile";
 
 // context
 import { UserProvider } from "./context/UserContext";
@@ -27,6 +28,9 @@ function App() {
             </Route>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/user/profile">
+              <Profile />
             </Route>
             <Route path="/">
               <Home />
