@@ -1,7 +1,7 @@
 import api from "../../../utils/api";
 
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useFlashMessage from "../../../hooks/useFlashMessage";
 
@@ -12,7 +12,7 @@ import styles from "./AddPet.module.css";
 const AddPet = () => {
   const [token] = useState(localStorage.getItem("token") || "");
   const { setFlashMessage } = useFlashMessage();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const registerPet = async (pet) => {
     let msgType = "success";
@@ -46,7 +46,7 @@ const AddPet = () => {
     setFlashMessage(data.message, msgType);
 
     if (msgType !== "error") {
-      history.push("/pet/mypets");
+      navigate("/pet/mypets");
     }
   };
 
