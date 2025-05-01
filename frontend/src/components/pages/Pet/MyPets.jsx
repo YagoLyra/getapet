@@ -26,10 +26,52 @@ const MyPets = () => {
       });
   }, [token]);
 
+  const removePet = async (id) => {
+    let msgType = "success";
+
+    const data = await api
+      .delete(`/pets/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        const updatedPets = pets.filter((pet) => pet._id !== id);
+        setPets(updatedPets);
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+
+    setFlashMessage(data.message, msgType);
+  };
+
+  const concludeAdoption = async (id) => {
+    let msgType = "success";
+
+    const data = await api
+      .patch(`/pets/conclude/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+
+    setFlashMessage(data.message, msgType);
+  };
+
   return (
     <section>
       <div className={styles.petlist_header}>
-        <h1>MyPets</h1>
+        <h1>Meus Pets</h1>
         <Link to="/pet/add">Cadastrar Pet</Link>
       </div>
       <div className={styles.petlist_container}>
@@ -45,13 +87,24 @@ const MyPets = () => {
               <div className={styles.actions}>
                 {pet.available ? (
                   <>
-                    {pet.adopted && (
-                      <button className={styles.conclude_btn}>
+                    {pet.adopter && (
+                      <button
+                        className={styles.conclude_btn}
+                        onClick={() => {
+                          concludeAdoption(pet._id);
+                        }}
+                      >
                         Concluir adoção
                       </button>
                     )}
                     <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
-                    <button>Excluir</button>
+                    <button
+                      onClick={() => {
+                        removePet(pet._id);
+                      }}
+                    >
+                      Excluir
+                    </button>
                   </>
                 ) : (
                   <p>Pet já adotado</p>
