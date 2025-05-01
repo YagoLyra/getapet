@@ -1,14 +1,14 @@
 import api from "../utils/api";
 
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useFlashMessage from "./useFlashMessage";
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
   const { setFlashMessage } = useFlashMessage();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,7 +41,7 @@ export default function useAuth() {
 
     localStorage.setItem("token", JSON.stringify(data.token));
 
-    history.push("/");
+    navigate("/");
   }
 
   async function login(user) {
@@ -69,7 +69,7 @@ export default function useAuth() {
     localStorage.removeItem("token");
     api.defaults.headers.Authorization = undefined;
 
-    history.push("/");
+    navigate("/");
     setFlashMessage(msgText, msgType);
   }
 
